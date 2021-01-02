@@ -56,7 +56,7 @@ public class BotTemplate {
         CarouselColumn column;
         List<CarouselColumn> carouselColumns = new ArrayList<>();
 
-        for (i = 0; i < 10; i++){
+        for (i = 0; i < hospitals.size(); i++){
 
             if (hospitals.get(i).getProvince() == province){
                 name = hospitals.get(i).getName();
