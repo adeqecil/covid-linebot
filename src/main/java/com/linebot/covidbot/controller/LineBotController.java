@@ -400,8 +400,8 @@ public class LineBotController {
                     .limit(1)
                     .map(l -> l.attr("href")).forEach(System.out::println);*/
             Elements links = Jsoup.connect(url).userAgent(userAgent).get().select("h3.r").select("a");
-            System.out.println("ini hasil link gambar "+links.get(1).attr("href"));
-            for (int i=0; i < 2; i++){
+            System.out.println("ini hasil link gambar "+links.get(0).attr("href"));
+            for (int i=0; i < 1; i++){
                 imageUrl = links.get(i).attr("href");
             }
 
