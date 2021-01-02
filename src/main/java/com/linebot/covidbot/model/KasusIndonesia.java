@@ -10,13 +10,13 @@ import java.util.Map;
 
 public class KasusIndonesia {
 
-    private String tipe, name;
+    private String type, name;
     private List<String> regions;
     private int timestamp, infected, recovered, fatal;
 
     @JsonProperty("type")
     public String getType(){
-        return tipe;
+        return type;
     }
 
     @JsonProperty("name")

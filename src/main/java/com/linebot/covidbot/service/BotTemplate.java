@@ -66,7 +66,7 @@ public class BotTemplate {
                     region = hospitals.get(i).getRegion();
 
                     column = new CarouselColumn(null, name, region, Arrays.asList(new MessageAction("Details",
-                            "[" + String.valueOf(i) + "]" + " Details : " + name))
+                            "[" + String.valueOf(i) + "]" + " Details : " + name.substring(0,40)))
                     );
                     carouselColumns.add(column);
 
