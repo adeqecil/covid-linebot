@@ -312,8 +312,8 @@ public class LineBotController {
         Date date = new Date(kasusIndonesia.getTimestamp());
         DateFormat formatnya = new SimpleDateFormat("dd-MM-yyyy HH:mm");
         String formatted = formatnya.format(date);
-        String msg = String.format("Berikut update kasus terkini.\n\n%1$s\nInfected: %2$d\nRecovered: %3$d\nFatal: " +
-                "%4$d\n\nLast Update %5$s", kasusIndonesia.getName(), kasusIndonesia.getInfected(),
+        String msg = String.format("Berikut update kasus terkini.\n\n%1$s\nInfected: %2$s\nRecovered: %3$s\nFatal: " +
+                "%4$s\n\nLast Update %5$s", kasusIndonesia.getName(), kasusIndonesia.getInfected(),
                 kasusIndonesia.getRecovered(), kasusIndonesia.getFatal(), formatted);
         botService.replyText(replyToken, msg);
     }
