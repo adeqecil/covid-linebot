@@ -31,6 +31,7 @@ import org.apache.http.client.methods.HttpGet;
 import org.apache.http.impl.nio.client.CloseableHttpAsyncClient;
 import org.apache.http.impl.nio.client.HttpAsyncClients;
 import org.jsoup.Jsoup;
+import org.jsoup.nodes.Element;
 import org.jsoup.select.Elements;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
@@ -400,7 +401,8 @@ public class LineBotController {
                     .limit(1)
                     .map(l -> l.attr("href")).forEach(System.out::println);*/
             Elements links = Jsoup.connect(url).userAgent(userAgent).get().select("h3.r").select("a");
-            System.out.println("ini hasil link gambar "+links.get(0).attr("href"));
+            for (Element link : links)
+                System.out.println(link);
             for (int i=0; i < 1; i++){
                 imageUrl = links.get(i).attr("href");
             }
