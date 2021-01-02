@@ -60,7 +60,7 @@ public class BotTemplate {
 
             if (hospitals.get(i).getProvince() == province){
                 name = hospitals.get(i).getName();
-                System.out.println(hospitals.get(i).getName());
+                System.out.println("isinya hospital for loop "+hospitals.get(i).getName());
 
                 for (int max = 0; max < 10; max++){
                     column = new CarouselColumn(null, name, province, Arrays.asList(new MessageAction("Details",
