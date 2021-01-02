@@ -446,6 +446,7 @@ public class LineBotController {
 
             int hospitalsIndex = Integer.parseInt(userTxt.substring(1,3));
             Hospitals details = hospitals.get(hospitalsIndex);
+            String nomorHp = null;
 
             ClassLoader classLoader = getClass().getClassLoader();
             String encoding = StandardCharsets.UTF_8.name();
@@ -454,12 +455,17 @@ public class LineBotController {
             String flexTemplate = IOUtils.toString(classLoader.getResourceAsStream("flex_hospital.json"),
                     StandardCharsets.UTF_8);
             System.out.println(">>> INI INDEX HOSPITAL "+hospitalsIndex+ " SAMA DETAILS "+details.getPhone());
+            if(details.getPhone() == null){
+                nomorHp = "Nomor tidak ada";
+            } else {
+                nomorHp = details.getPhone();
+            }
             flexTemplate = String.format(flexTemplate,
                     //searchImage(botTemplate.escape((details.getName()))),
                     botTemplate.escape(details.getName()),
                     botTemplate.escape(details.getAddress()),
                     botTemplate.escape(details.getRegion()),
-                    details.getPhone(),
+                    nomorHp,
                     cekGoogle(botTemplate.escape(details.getName()))
             );
 
