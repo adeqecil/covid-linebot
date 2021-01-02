@@ -256,7 +256,7 @@ public class LineBotController {
     }
 
     private void processPulau(String replyToken, String messageText){
-        List<String> provinsi = null;
+        List<String> provinsi = new ArrayList<>();
         System.out.println(">>>masuk ke processPulau method<<<");
         int i;
         if (messageText.toLowerCase().equals("jawa")){
