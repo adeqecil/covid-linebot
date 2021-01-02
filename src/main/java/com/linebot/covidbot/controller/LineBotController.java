@@ -361,7 +361,7 @@ public class LineBotController {
                 getHospitals();
             }
 
-            int hospitalsIndex = Integer.parseInt(String.valueOf(userTxt.charAt(1))) - 1;
+            int hospitalsIndex = Integer.parseInt(String.valueOf(userTxt.charAt(2))) - 1;
             Hospitals details = hospitals.get(hospitalsIndex);
 
             ClassLoader classLoader = getClass().getClassLoader();
@@ -402,7 +402,7 @@ public class LineBotController {
                     .map(l -> l.attr("href")).forEach(System.out::println);*/
             Elements links = Jsoup.connect(url).userAgent(userAgent).get().select("h3.r").select("a");
             for (Element link : links)
-                System.out.println(link);
+                System.out.println(">>> INI ISI LINK ELEMEN "+link);
             /*for (int i=0; i < 1; i++){
                 imageUrl = links.get(i).attr("href");
             }*/
