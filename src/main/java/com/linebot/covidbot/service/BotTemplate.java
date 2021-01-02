@@ -56,17 +56,19 @@ public class BotTemplate {
         CarouselColumn column;
         List<CarouselColumn> carouselColumns = new ArrayList<>();
         System.out.println(">>Masuk showCarouselEvents method<<<");
-        for (i = 0; i < hospitals.size(); i++){
-            System.out.println(">>>Outer loop carouselEvents " + hospitals.get(i).getProvince());
-            if (hospitals.get(i).getProvince().equalsIgnoreCase(province)){
-                name = hospitals.get(i).getName();
-                System.out.println("isinya hospital for loop "+hospitals.get(i).getName());
+        for (i = 0; i < hospitals.size(); i++) {
+            System.out.println(">>>Outer loop carouselEvents <<<");
+            if (carouselColumns.size() == 9) {
+                break;
+            } else {
+                if (hospitals.get(i).getProvince().equalsIgnoreCase(province)) {
+                    name = hospitals.get(i).getName();
 
-                for (int max = 0; max < 10; max++){
                     column = new CarouselColumn(null, name, province, Arrays.asList(new MessageAction("Details",
-                            "["+String.valueOf(i)+"]" + " Details : " + name))
+                            "[" + String.valueOf(i) + "]" + " Details : " + name))
                     );
                     carouselColumns.add(column);
+
                 }
             }
         }
