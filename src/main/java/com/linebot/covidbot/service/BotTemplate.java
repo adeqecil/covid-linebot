@@ -63,11 +63,11 @@ public class BotTemplate {
             } else {
                 if (hospitals.get(i).getProvince().equalsIgnoreCase(province)) {
                     name = hospitals.get(i).getName();
+                    name = name.substring(0, Math.min(20, name.length()));
                     region = hospitals.get(i).getRegion();
 
                     column = new CarouselColumn(null, name, region, Arrays.asList(new MessageAction("Details",
-                            "[" + String.valueOf(i) + "]" + " Details: " + name.substring(0, Math.min(5,
-                                    name.length()))))
+                            "[" + String.valueOf(i) + "]" + " Details: " + name))
                     );
                     carouselColumns.add(column);
 
