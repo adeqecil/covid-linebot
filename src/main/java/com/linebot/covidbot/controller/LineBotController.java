@@ -378,7 +378,7 @@ public class LineBotController {
                     botTemplate.escape(details.getName()),
                     botTemplate.escape(details.getAddress()),
                     botTemplate.escape(details.getRegion()),
-                    details.getPhone(),
+                    botTemplate.escape(details.getPhone()),
                     cekGoogle(botTemplate.escape(details.getName()))
             );
 

@@ -1,19 +1,12 @@
 {
   "type": "bubble",
-  "hero": {
-    "type": "image",
-    "url": "%1$s",
-    "size": "full",
-    "aspectRatio": "20:13",
-    "aspectMode": "cover"
-  },
   "body": {
     "type": "box",
     "layout": "vertical",
     "contents": [
       {
         "type": "text",
-        "text": "%2$s",
+        "text": "%1$s",
         "weight": "bold",
         "size": "xl"
       },
@@ -37,7 +30,7 @@
               },
               {
                 "type": "text",
-                "text": "%3$s",
+                "text": "%2$s",
                 "wrap": true,
                 "color": "#666666",
                 "size": "sm",
@@ -63,7 +56,7 @@
                 "color": "#666666",
                 "size": "sm",
                 "flex": 5,
-                "text": "%4$s"
+                "text": "%3$s"
               }
             ]
           },
@@ -80,7 +73,7 @@
               },
               {
                 "type": "text",
-                "text": "%5$s",
+                "text": "%4$s",
                 "flex": 5,
                 "size": "sm",
                 "color": "#666666"
@@ -103,7 +96,7 @@
         "action": {
           "type": "uri",
           "label": "Cek Google",
-          "uri": "%6$s"
+          "uri": "%5$s"
         }
       },
       {
