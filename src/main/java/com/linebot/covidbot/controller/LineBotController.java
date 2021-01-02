@@ -403,9 +403,9 @@ public class LineBotController {
             Elements links = Jsoup.connect(url).userAgent(userAgent).get().select("h3.r").select("a");
             for (Element link : links)
                 System.out.println(link);
-            for (int i=0; i < 1; i++){
+            /*for (int i=0; i < 1; i++){
                 imageUrl = links.get(i).attr("href");
-            }
+            }*/
 
         } catch (IOException e) {
             e.printStackTrace();
