@@ -335,11 +335,11 @@ public class LineBotController {
             String jsonResponse = inputStream.toString();
 
             System.out.println("Got Result");
-            System.out.println(jsonResponse);
+            System.out.println(inputStream);
 
             ObjectMapper objectMapper = new ObjectMapper();
             //System.out.println(objectMapper.readValue(jsonResponse, Hospitals.class));
-            hospitals = objectMapper.readValue(jsonResponse, new TypeReference<List<Hospitals>>() {
+            hospitals = objectMapper.readValue(inputStream, new TypeReference<List<Hospitals>>() {
             });
 
         } catch (InterruptedException | ExecutionException | IOException e){
