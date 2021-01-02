@@ -338,6 +338,7 @@ public class LineBotController {
             System.out.println(jsonResponse);
 
             ObjectMapper objectMapper = new ObjectMapper();
+            System.out.println(objectMapper.readValue(jsonResponse, Hospitals.class));
             hospitals = objectMapper.readValue(jsonResponse, new TypeReference<List<Hospitals>>() {
             });
 
