@@ -335,7 +335,7 @@ public class LineBotController {
             InputStream inputStream = responseGet.getEntity().getContent();
             String encoding = StandardCharsets.UTF_8.name();
 
-            String jsonResponse = inputStream.toString();
+            String jsonResponse = IOUtils.toString(inputStream, StandardCharsets.UTF_8);
 
             System.out.println("Got Result");
             System.out.println(inputStream);
@@ -344,6 +344,7 @@ public class LineBotController {
             //System.out.println(objectMapper.readValue(jsonResponse, Hospitals.class));
             hospitals = objectMapper.readValue(inputStream, new TypeReference<List<Hospitals>>() {
             });
+            System.out.println(jsonResponse);
             System.out.println(">> Keluar gethospital isinya hospitals "+hospitals);
 
         } catch (InterruptedException | ExecutionException | IOException e){
