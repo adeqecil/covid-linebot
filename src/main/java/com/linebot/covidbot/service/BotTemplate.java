@@ -57,9 +57,8 @@ public class BotTemplate {
         List<CarouselColumn> carouselColumns = new ArrayList<>();
         System.out.println(">>Masuk showCarouselEvents method<<<");
         for (i = 0; i < hospitals.size(); i++){
-            System.out.println(">>>ini var province " +province);
-            System.out.println(">>>Outer loop carouselEvents" + hospitals.get(i).getProvince());
-            if (hospitals.get(i).getProvince().equals(province)){
+            System.out.println(">>>Outer loop carouselEvents " + hospitals.get(i).getProvince());
+            if (hospitals.get(i).getProvince().equalsIgnoreCase(province)){
                 name = hospitals.get(i).getName();
                 System.out.println("isinya hospital for loop "+hospitals.get(i).getName());
 
