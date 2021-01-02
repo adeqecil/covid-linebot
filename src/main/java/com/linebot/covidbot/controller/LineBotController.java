@@ -200,8 +200,8 @@ public class LineBotController {
 
     private void handleOneOnOneChats(String replyToken, String textMessage) {
         String msgText = textMessage.toLowerCase();
-        System.out.println(">>>Masuk method handleOneOnOneChats <<<");
-        if (msgText.contains("a")
+        System.out.println(">>>Masuk method handleOneOnOneChats ini isi msgText lowercase <<<"+msgText);
+        if (msgText.equals("a")
                 || msgText.equals("b")
                 || msgText.equals("c")
         ) {
