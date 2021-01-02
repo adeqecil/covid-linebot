@@ -33,6 +33,9 @@ import org.apache.http.impl.nio.client.HttpAsyncClients;
 import org.jsoup.Jsoup;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
+import org.springframework.core.io.DefaultResourceLoader;
+import org.springframework.core.io.Resource;
+import org.springframework.core.io.ResourceLoader;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -359,7 +362,9 @@ public class LineBotController {
 
             ClassLoader classLoader = getClass().getClassLoader();
             String encoding = StandardCharsets.UTF_8.name();
-            String flexTemplate = classLoader.getResourceAsStream("flex_hospital.json").toString();
+            ResourceLoader resourceLoader = new DefaultResourceLoader();
+            Resource resource = resourceLoader.getResource("flex_hospital.json");
+            String flexTemplate = resource.toString();
 
             flexTemplate = String.format(flexTemplate,
                     searchImage(botTemplate.escape((details.getName()))),
@@ -385,7 +390,7 @@ public class LineBotController {
         String imageUrl = null;
 
         try {
-            imageUrl = Jsoup.connect("https://www.google.com.au/search?q=fred").get()
+            imageUrl = Jsoup.connect(url).get()
                     .select("h3.r").select("a")
                     .stream()
                     .limit(1)
