@@ -363,7 +363,7 @@ public class LineBotController {
                 getHospitals();
             }
 
-            int hospitalsIndex = Integer.parseInt(String.valueOf(userTxt.substring(1,3))) - 1;
+            int hospitalsIndex = Integer.parseInt(userTxt.substring(1,3));
             Hospitals details = hospitals.get(hospitalsIndex);
 
             ClassLoader classLoader = getClass().getClassLoader();
@@ -372,7 +372,7 @@ public class LineBotController {
             Resource resource = resourceLoader.getResource("flex_hospital.json");
             String flexTemplate = IOUtils.toString(classLoader.getResourceAsStream("flex_hospital.json"),
                     StandardCharsets.UTF_8);
-            System.out.println(">>> INI INDEX HOSPITAL "+hospitalsIndex+ " SAMA DETAILS "+details);
+            System.out.println(">>> INI INDEX HOSPITAL "+hospitalsIndex+ " SAMA DETAILS "+details.getPhone());
             flexTemplate = String.format(flexTemplate,
                     //searchImage(botTemplate.escape((details.getName()))),
                     botTemplate.escape(details.getName()),
