@@ -24,6 +24,7 @@ import com.linecorp.bot.model.message.TextMessage;
 import com.linecorp.bot.model.message.flex.container.FlexContainer;
 import com.linecorp.bot.model.objectmapper.ModelObjectMapper;
 import com.linecorp.bot.model.profile.UserProfileResponse;
+import net.minidev.json.JSONObject;
 import org.apache.commons.io.IOUtils;
 import org.apache.commons.lang3.StringUtils;
 import org.apache.http.HttpResponse;
@@ -31,6 +32,7 @@ import org.apache.http.client.methods.HttpGet;
 import org.apache.http.impl.nio.client.CloseableHttpAsyncClient;
 import org.apache.http.impl.nio.client.HttpAsyncClients;
 import org.jsoup.Jsoup;
+import org.jsoup.nodes.Document;
 import org.jsoup.nodes.Element;
 import org.jsoup.select.Elements;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -361,7 +363,7 @@ public class LineBotController {
                 getHospitals();
             }
 
-            int hospitalsIndex = Integer.parseInt(String.valueOf(userTxt.charAt(2))) - 1;
+            int hospitalsIndex = Integer.parseInt(String.valueOf(userTxt.substring(1,3))) - 1;
             Hospitals details = hospitals.get(hospitalsIndex);
 
             ClassLoader classLoader = getClass().getClassLoader();
@@ -372,7 +374,7 @@ public class LineBotController {
                     StandardCharsets.UTF_8);
 
             flexTemplate = String.format(flexTemplate,
-                    searchImage(botTemplate.escape((details.getName()))),
+                    //searchImage(botTemplate.escape((details.getName()))),
                     botTemplate.escape(details.getName()),
                     botTemplate.escape(details.getAddress()),
                     botTemplate.escape(details.getRegion()),
@@ -401,6 +403,7 @@ public class LineBotController {
                     .limit(1)
                     .map(l -> l.attr("href")).forEach(System.out::println);*/
             imageUrl = Jsoup.connect(url).userAgent(userAgent).get().select("h3.r").select("a").attr("href");
+
             System.out.println(">>> INI ISI IMAGEURL "+imageUrl);
             /*for (int i=0; i < 1; i++){
                 imageUrl = links.get(i).attr("href");
