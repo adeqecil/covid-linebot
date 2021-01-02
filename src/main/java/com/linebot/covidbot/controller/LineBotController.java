@@ -269,7 +269,7 @@ public class LineBotController {
             provinsi = sulawesi;
         }
         String hasilProvinsi = "\n";
-        for (i = 0; i <= provinsi.size(); i++){
+        for (i = 0; i < provinsi.size(); i++){
             hasilProvinsi += i+1 + ". " + provinsi.get(i) + "\n";
         }
         botService.replyText(replyToken, "Silakan pilih provinsi berikut: " + hasilProvinsi);
