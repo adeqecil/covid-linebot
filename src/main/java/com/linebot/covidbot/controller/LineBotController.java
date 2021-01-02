@@ -365,7 +365,8 @@ public class LineBotController {
             String encoding = StandardCharsets.UTF_8.name();
             ResourceLoader resourceLoader = new DefaultResourceLoader();
             Resource resource = resourceLoader.getResource("flex_hospital.json");
-            String flexTemplate = resource.toString();
+            String flexTemplate = IOUtils.toString(classLoader.getResourceAsStream("flex_hospital.json"),
+                    StandardCharsets.UTF_8);
 
             flexTemplate = String.format(flexTemplate,
                     searchImage(botTemplate.escape((details.getName()))),
