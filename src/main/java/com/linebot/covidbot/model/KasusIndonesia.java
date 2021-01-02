@@ -1,5 +1,6 @@
 package com.linebot.covidbot.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.annotation.JsonPropertyOrder;
@@ -9,7 +10,7 @@ import java.text.NumberFormat;
 import java.util.List;
 import java.util.Map;
 
-
+@JsonIgnoreProperties(ignoreUnknown = true)
 public class KasusIndonesia {
 
     private String type, name;
@@ -53,9 +54,6 @@ public class KasusIndonesia {
         return formatter.format(fatal);
     }
 
-    @JsonProperty("regions")
-    public List<String> getRegions(){
-        return regions;
-    }
+
 }
 
