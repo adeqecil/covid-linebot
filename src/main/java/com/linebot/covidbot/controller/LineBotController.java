@@ -342,7 +342,7 @@ public class LineBotController {
 
             ObjectMapper objectMapper = new ObjectMapper();
             //System.out.println(objectMapper.readValue(jsonResponse, Hospitals.class));
-            hospitals = objectMapper.readValue(responseGet.getEntity().getContent(), new TypeReference<List<Hospitals>>() {
+            hospitals = objectMapper.readValue(inputStream, new TypeReference<List<Hospitals>>() {
             });
             System.out.println(jsonResponse);
             System.out.println(">> Keluar gethospital isinya hospitals "+hospitals);
