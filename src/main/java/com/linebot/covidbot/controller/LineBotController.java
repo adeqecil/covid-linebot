@@ -304,7 +304,7 @@ public class LineBotController {
             getHospitals();
         }
         TemplateMessage carouselEvents = botTemplate.carouselEvents(hospitals, province);
-
+        System.out.println(">>> Isi carouselEvents "+carouselEvents);
         if (additionalInfo == null){
             botService.reply(replyToken, carouselEvents);
             return;

@@ -71,6 +71,7 @@ public class BotTemplate {
             }
         }
         CarouselTemplate carouselTemplate = new CarouselTemplate(carouselColumns);
+        System.out.println(">> Keluar carouselEvent isinya carouseltemplate "+ carouselTemplate);
         return new TemplateMessage("Hasil", carouselTemplate);
     }
 
