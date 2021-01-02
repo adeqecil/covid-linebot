@@ -372,13 +372,13 @@ public class LineBotController {
             Resource resource = resourceLoader.getResource("flex_hospital.json");
             String flexTemplate = IOUtils.toString(classLoader.getResourceAsStream("flex_hospital.json"),
                     StandardCharsets.UTF_8);
-
+            System.out.println(">>> INI INDEX HOSPITAL "+hospitalsIndex+ " SAMA DETAILS "+details);
             flexTemplate = String.format(flexTemplate,
                     //searchImage(botTemplate.escape((details.getName()))),
                     botTemplate.escape(details.getName()),
                     botTemplate.escape(details.getAddress()),
                     botTemplate.escape(details.getRegion()),
-                    botTemplate.escape(details.getPhone()),
+                    details.getPhone(),
                     cekGoogle(botTemplate.escape(details.getName()))
             );
 
