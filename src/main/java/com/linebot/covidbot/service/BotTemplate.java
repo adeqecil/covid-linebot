@@ -52,7 +52,7 @@ public class BotTemplate {
 
     public TemplateMessage carouselEvents(List<Hospitals> hospitals, String province){
         int i;
-        String name = null;
+        String name, region = null;
         CarouselColumn column;
         List<CarouselColumn> carouselColumns = new ArrayList<>();
         System.out.println(">>Masuk showCarouselEvents method<<<");
@@ -63,8 +63,9 @@ public class BotTemplate {
             } else {
                 if (hospitals.get(i).getProvince().equalsIgnoreCase(province)) {
                     name = hospitals.get(i).getName();
+                    region = hospitals.get(i).getRegion();
 
-                    column = new CarouselColumn(null, name, province, Arrays.asList(new MessageAction("Details",
+                    column = new CarouselColumn(null, name, region, Arrays.asList(new MessageAction("Details",
                             "[" + String.valueOf(i) + "]" + " Details : " + name))
                     );
                     carouselColumns.add(column);

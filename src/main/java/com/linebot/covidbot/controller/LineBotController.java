@@ -391,7 +391,7 @@ public class LineBotController {
         String imageUrl = null;
 
         try {
-            imageUrl = Jsoup.connect(url).get()
+            imageUrl = Jsoup.connect(url).userAgent(userAgent).referrer("https://www.google.com/").get()
                     .select("h3.r").select("a")
                     .stream()
                     .limit(1)
