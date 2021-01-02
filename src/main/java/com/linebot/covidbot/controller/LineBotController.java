@@ -344,7 +344,7 @@ public class LineBotController {
             //System.out.println(objectMapper.readValue(jsonResponse, Hospitals.class));
             hospitals = Arrays.asList(objectMapper.readValue(jsonResponse, Hospitals[].class));
             System.out.println(jsonResponse);
-            System.out.println(">> Keluar gethospital isinya hospitals "+hospitals);
+            System.out.println(">> Keluar gethospital isinya hospitals "+hospitals.get(1));
 
         } catch (InterruptedException | ExecutionException | IOException e){
             throw new RuntimeException(e);
