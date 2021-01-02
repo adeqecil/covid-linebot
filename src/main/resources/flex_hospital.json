@@ -8,7 +8,7 @@
         "type": "text",
         "text": "%1$s",
         "weight": "bold",
-        "size": "xl"
+        "size": "md"
       },
       {
         "type": "box",
@@ -25,7 +25,7 @@
                 "type": "text",
                 "text": "Alamat",
                 "color": "#aaaaaa",
-                "size": "sm",
+                "size": "xs",
                 "flex": 2
               },
               {
@@ -33,7 +33,7 @@
                 "text": "%2$s",
                 "wrap": true,
                 "color": "#666666",
-                "size": "sm",
+                "size": "xs",
                 "flex": 5
               }
             ]
