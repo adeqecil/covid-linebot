@@ -55,11 +55,12 @@ public class BotTemplate {
         String name = null;
         CarouselColumn column;
         List<CarouselColumn> carouselColumns = new ArrayList<>();
-
+        System.out.println(">>Masuk showCarouselEvents method<<<");
         for (i = 0; i < hospitals.size(); i++){
 
             if (hospitals.get(i).getProvince() == province){
                 name = hospitals.get(i).getName();
+                System.out.println(hospitals.get(i).getName());
             }
 
             column = new CarouselColumn(null, name, province, Arrays.asList(new MessageAction("Details",
