@@ -257,13 +257,13 @@ public class LineBotController {
     private void processPulau(String replyToken, String messageText){
         List<String> provinsi = null;
         int i;
-        if (messageText.toLowerCase() == "jawa"){
+        if (messageText.toLowerCase().equals("jawa")){
             provinsi = jawa;
-        } else if (messageText.toLowerCase() == "kalimantan"){
+        } else if (messageText.toLowerCase().equals("kalimantan")){
             provinsi = kalimantan;
-        } else if (messageText.toLowerCase() == "sumatera"){
+        } else if (messageText.toLowerCase().equals("sumatera")){
             provinsi = sumatera;
-        } else if (messageText.toLowerCase() == "sulawesi"){
+        } else if (messageText.toLowerCase().equals("sulawesi")){
             provinsi = sulawesi;
         }
         String hasilProvinsi = null;
@@ -274,10 +274,10 @@ public class LineBotController {
     }
 
     private void handleListHospitals(String replyToken, String words){
-        String daftarPulau = null;
+        String daftarPulau = "\n";
         int i;
         for (i = 0; i < pulau.size(); i++){
-            daftarPulau += pulau.get(i) + "\n";
+            daftarPulau += i + ". " + pulau.get(i) + "\n";
         }
         botService.replyText(replyToken, "Silakan pilih pulau berikut " + daftarPulau);
     }
