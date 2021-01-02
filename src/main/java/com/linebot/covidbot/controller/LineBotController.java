@@ -162,22 +162,37 @@ public class LineBotController {
 
     private void handleGroupChats(String replyToken, String textMessage, String groupId){
         String msgText = textMessage.toLowerCase();
-        if (msgText.contains("bot leave")){
-            if (sender == null){
-                botService.replyText(replyToken, "Halo, add bot ini dulu as a friend");
-            } else {
-                botService.leaveGroup(groupId);
-            }
-        } else if (msgText.contains("tes")){
-            processText(replyToken, textMessage);
-        } else if (msgText.contains("sumatra")
-                || msgText.contains("kalimantan")
-                || msgText.contains("sulawesi")
-                || msgText.contains("jawa")
-                || msgText.contains("bali")
-                || msgText.contains("papua")) {
+        if (msgText.equals("a")
+                || msgText.equals("b")
+        ) {
+            processText(replyToken, msgText);
+        }else if (msgText.equals("cek daftar command")){
+            processDaftarCommand(replyToken, msgText);
+        } else if (msgText.equals("sumatera")
+                || msgText.equals("kalimantan")
+                || msgText.equals("sulawesi")
+                || msgText.equals("jawa")
+                || msgText.equals("bali")) {
+            processPulau(replyToken, textMessage);
+        } else if (msgText.equals("sumatera utara")
+                || msgText.equals("sumatera selatan")
+                || msgText.equals("sumatera barat")
+                || msgText.equals("kalimantan timur")
+                || msgText.equals("kalimantan barat")
+                || msgText.equals("kalimantan selatan")
+                || msgText.equals("kalimantan utara")
+                || msgText.equals("sulawesi barat")
+                || msgText.equals("sulawesi selatan")
+                || msgText.equals("sulawesi tengah")
+                || msgText.equals("sulawesi utara")
+                || msgText.equals("jawa timur")
+                || msgText.equals("jawa barat")
+                || msgText.equals("jawa tengah")
+                || msgText.equals("dki jakarta")
+                || msgText.equals("di yogyakarta")
+                || msgText.equals("allbali")) {
             showCarouselEvents(replyToken, textMessage);
-        } else if (msgText.contains("details")){
+        } else if (msgText.contains("details")) {
             showHospitalDetails(replyToken, textMessage);
         } else {
             handleFallbackMessage(replyToken, new GroupSource(groupId, sender.getUserId()));
@@ -186,24 +201,37 @@ public class LineBotController {
 
     private void handleRoomChats(String replyToken, String textMessage, String roomId){
         String msgText = textMessage.toLowerCase();
-        if (msgText.contains("bot leave")) {
-            if (sender == null) {
-                botService.replyText(replyToken, "Halo, add bot ini dulu as a friend");
-            } else {
-                botService.leaveRoom(roomId);
-            }
-        } else if (msgText.contains("a")
-                || msgText.contains("b")
+        if (msgText.equals("a")
+                || msgText.equals("b")
         ) {
             processText(replyToken, msgText);
-        } else if (msgText.contains("sumatra")
-                || msgText.contains("kalimantan")
-                || msgText.contains("sulawesi")
-                || msgText.contains("jawa")
-                || msgText.contains("bali")
-                || msgText.contains("papua")) {
+        }else if (msgText.equals("cek daftar command")){
+            processDaftarCommand(replyToken, msgText);
+        } else if (msgText.equals("sumatera")
+                || msgText.equals("kalimantan")
+                || msgText.equals("sulawesi")
+                || msgText.equals("jawa")
+                || msgText.equals("bali")) {
+            processPulau(replyToken, textMessage);
+        } else if (msgText.equals("sumatera utara")
+                || msgText.equals("sumatera selatan")
+                || msgText.equals("sumatera barat")
+                || msgText.equals("kalimantan timur")
+                || msgText.equals("kalimantan barat")
+                || msgText.equals("kalimantan selatan")
+                || msgText.equals("kalimantan utara")
+                || msgText.equals("sulawesi barat")
+                || msgText.equals("sulawesi selatan")
+                || msgText.equals("sulawesi tengah")
+                || msgText.equals("sulawesi utara")
+                || msgText.equals("jawa timur")
+                || msgText.equals("jawa barat")
+                || msgText.equals("jawa tengah")
+                || msgText.equals("dki jakarta")
+                || msgText.equals("di yogyakarta")
+                || msgText.equals("allbali")) {
             showCarouselEvents(replyToken, textMessage);
-        } else if (msgText.contains("details")){
+        } else if (msgText.contains("details")) {
             showHospitalDetails(replyToken, textMessage);
         } else {
             handleFallbackMessage(replyToken, new RoomSource(roomId, sender.getUserId()));
@@ -431,7 +459,7 @@ public class LineBotController {
                     botTemplate.escape(details.getName()),
                     botTemplate.escape(details.getAddress()),
                     botTemplate.escape(details.getRegion()),
-                    botTemplate.escape(details.getPhone()),
+                    details.getPhone(),
                     cekGoogle(botTemplate.escape(details.getName()))
             );
 
