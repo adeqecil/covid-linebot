@@ -61,12 +61,14 @@ public class BotTemplate {
             if (hospitals.get(i).getProvince() == province){
                 name = hospitals.get(i).getName();
                 System.out.println(hospitals.get(i).getName());
-            }
 
-            column = new CarouselColumn(null, name, province, Arrays.asList(new MessageAction("Details",
-                    "["+String.valueOf(i)+"]" + " Details : " + name))
-            );
-            carouselColumns.add(column);
+                for (int max = 0; max < 10; max++){
+                    column = new CarouselColumn(null, name, province, Arrays.asList(new MessageAction("Details",
+                            "["+String.valueOf(i)+"]" + " Details : " + name))
+                    );
+                    carouselColumns.add(column);
+                }
+            }
         }
         CarouselTemplate carouselTemplate = new CarouselTemplate(carouselColumns);
         return new TemplateMessage("Hasil", carouselTemplate);
