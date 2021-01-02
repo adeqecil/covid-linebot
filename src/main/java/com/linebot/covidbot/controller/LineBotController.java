@@ -2,6 +2,7 @@ package com.linebot.covidbot.controller;
 
 import com.fasterxml.jackson.core.type.TypeReference;
 import com.linebot.covidbot.model.Hospitals;
+import com.linebot.covidbot.model.KasusIndonesia;
 import com.linebot.covidbot.model.LineEventsModel;
 import com.linebot.covidbot.service.BotService;
 import com.linebot.covidbot.service.BotTemplate;
@@ -47,6 +48,8 @@ import org.springframework.web.bind.annotation.*;
 import java.io.IOException;
 import java.io.InputStream;
 import java.nio.charset.StandardCharsets;
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
 import java.util.*;
 import java.util.concurrent.ExecutionException;
 import java.util.concurrent.Future;
@@ -77,6 +80,7 @@ public class LineBotController {
     private final List<String> sumatera = Arrays.asList("Sumatera Utara", "Sumatera Selatan", "Sumatera Barat");
     private UserProfileResponse sender = null;
     private List<Hospitals> hospitals = null;
+    private KasusIndonesia kasusIndonesia = null;
 
     @RequestMapping(value = "/webhook", method = RequestMethod.POST)
     public ResponseEntity<String> callback(@RequestHeader("X-Line-Signature") String xLineSignature,
@@ -211,9 +215,10 @@ public class LineBotController {
         System.out.println(">>>Masuk method handleOneOnOneChats ini isi msgText lowercase <<<"+msgText);
         if (msgText.equals("a")
                 || msgText.equals("b")
-                || msgText.equals("c")
         ) {
             processText(replyToken, msgText);
+        }else if (msgText.equals("cek daftar command")){
+            processDaftarCommand(replyToken, msgText);
         } else if (msgText.equals("sumatera")
                 || msgText.equals("kalimantan")
                 || msgText.equals("sulawesi")
@@ -257,10 +262,15 @@ public class LineBotController {
         if (intent.equalsIgnoreCase("a")){
             handleListHospitals(replyToken, messageText);
         } else if (intent.equalsIgnoreCase("b")){
-            handleJumlahKasusProv(replyToken, messageText);
-        } else if (intent.equalsIgnoreCase("c")){
             handleJumlahKasusTotal(replyToken, messageText);
         }
+    }
+
+    private void processDaftarCommand(String replyToken, String messageText){
+        String daftarCommand = "\nA. Daftar Rumah Sakit\nB. Cek Kasus Indonesia";
+
+        botService.replyText(replyToken,
+                "Berikut daftar command yang bisa digunakan.\nKirim pilihan abjadnya aja ya, contoh: A\n" +daftarCommand);
     }
 
     private void processPulau(String replyToken, String messageText){
@@ -280,7 +290,7 @@ public class LineBotController {
         for (i = 0; i < provinsi.size(); i++){
             hasilProvinsi += i+1 + ". " + provinsi.get(i) + "\n";
         }
-        botService.replyText(replyToken, "Silakan pilih provinsi berikut: " + hasilProvinsi);
+        botService.replyText(replyToken, "Silakan pilih provinsi berikut.\nContoh: jawa timur\n\n" + hasilProvinsi);
     }
 
     private void handleListHospitals(String replyToken, String words){
@@ -289,15 +299,23 @@ public class LineBotController {
         for (i = 0; i < pulau.size(); i++){
             daftarPulau += i+1 + ". " + pulau.get(i) + "\n";
         }
-        botService.replyText(replyToken, "Silakan pilih pulau berikut " + daftarPulau);
+        botService.replyText(replyToken, "Silakan ketik salah satu pulau berikut.\nContoh: jawa\n\n" +
+                daftarPulau);
     }
 
-    private void handleJumlahKasusProv(String replyToken, String words){
-
-    }
 
     private void handleJumlahKasusTotal(String replyToken, String words){
+        if(kasusIndonesia == null){
+            getJumlahKasusTotal();
+        }
 
+        Date date = new Date(kasusIndonesia.getTimestamp());
+        DateFormat formatnya = new SimpleDateFormat("dd-MM-yyyy HH:mm");
+        String formatted = formatnya.format(date);
+        String msg = String.format("Berikut update kasus terkini.\n\n%1$s\nInfected: %2$d\nRecovered: %3$d\nFatal: " +
+                "%4$d\n\nLast Update %5$s", kasusIndonesia.getName(), kasusIndonesia.getInfected(),
+                kasusIndonesia.getRecovered(), kasusIndonesia.getFatal(), formatted);
+        botService.replyText(replyToken, msg);
     }
 
     private void showCarouselEvents(String replyToken, String province){
@@ -319,6 +337,41 @@ public class LineBotController {
         messageList.add(new TextMessage(additionalInfo));
         messageList.add(carouselEvents);
         botService.reply(replyToken, messageList);
+    }
+
+    private void getJumlahKasusTotal(){
+        //GET method for json
+        String URI = "https://dekontaminasi.com/api/id/covid19/stats";
+        System.out.println("URI: " + URI);
+
+        try (CloseableHttpAsyncClient client = HttpAsyncClients.createDefault()){
+            client.start();
+            //HTTP to retrive data
+            HttpGet get = new HttpGet(URI);
+
+            Future<HttpResponse> future = client.execute(get, null);
+            HttpResponse responseGet = future.get();
+            System.out.println("HTTP executed");
+            System.out.println("HTTP Status response: " + responseGet.getStatusLine().getStatusCode());
+
+            //response from get request
+            InputStream inputStream = responseGet.getEntity().getContent();
+            String encoding = StandardCharsets.UTF_8.name();
+
+            String jsonResponse = IOUtils.toString(inputStream, StandardCharsets.UTF_8);
+
+            System.out.println("Got Result");
+            System.out.println(inputStream);
+
+            ObjectMapper objectMapper = new ObjectMapper();
+            //System.out.println(objectMapper.readValue(jsonResponse, Hospitals.class));
+            kasusIndonesia = objectMapper.readValue(jsonResponse, KasusIndonesia.class);
+
+            System.out.println(">> Keluar gethospital isinya hospitals "+kasusIndonesia.getName());
+
+        } catch (InterruptedException | ExecutionException | IOException e){
+            throw new RuntimeException(e);
+        }
     }
 
     private void getHospitals(){
