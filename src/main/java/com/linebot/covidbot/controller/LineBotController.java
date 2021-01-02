@@ -31,6 +31,7 @@ import org.apache.http.client.methods.HttpGet;
 import org.apache.http.impl.nio.client.CloseableHttpAsyncClient;
 import org.apache.http.impl.nio.client.HttpAsyncClients;
 import org.jsoup.Jsoup;
+import org.jsoup.select.Elements;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.core.io.DefaultResourceLoader;
@@ -47,6 +48,7 @@ import java.util.*;
 import java.util.concurrent.ExecutionException;
 import java.util.concurrent.Future;
 import java.util.stream.Collectors;
+import java.util.stream.Stream;
 
 @RestController
 public class LineBotController {
@@ -389,14 +391,18 @@ public class LineBotController {
         String userAgent = "Mozilla/5.0 (Windows NT 6.3; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/53.0.2785.116 Safari/537.36";
         keyword = keyword.replace(' ', '+');
         String url = "https://www.google.com/search?site=imghp&tbm=isch&source=hp&q="+keyword+"&gws_rd=cr";
-        String imageUrl = null;
+        String imageUrl;
 
         try {
-            imageUrl = Jsoup.connect(url).userAgent(userAgent).referrer("https://www.google.com/").get()
+            /*Jsoup.connect(url).userAgent(userAgent).get()
                     .select("h3.r").select("a")
                     .stream()
                     .limit(1)
-                    .map(l -> l.attr("href")).toString();
+                    .map(l -> l.attr("href")).forEach(System.out::println);*/
+            Elements links = Jsoup.connect(url).userAgent(userAgent).get().select("h3.r").select("a");
+            for (int i=0; i <1; i++){
+                imageUrl = links.get(i).attr("href");
+            }
 
         } catch (IOException e) {
             e.printStackTrace();
