@@ -256,6 +256,7 @@ public class LineBotController {
 
     private void processPulau(String replyToken, String messageText){
         List<String> provinsi = null;
+        System.out.println(">>>masuk ke processPulau method<<<");
         int i;
         if (messageText.toLowerCase().equals("jawa")){
             provinsi = jawa;
@@ -266,9 +267,9 @@ public class LineBotController {
         } else if (messageText.toLowerCase().equals("sulawesi")){
             provinsi = sulawesi;
         }
-        String hasilProvinsi = null;
+        String hasilProvinsi = "\n";
         for (i = 0; i <= provinsi.size(); i++){
-            hasilProvinsi += provinsi.get(i) + "\n";
+            hasilProvinsi += i+1 + ". " + provinsi.get(i) + "\n";
         }
         botService.replyText(replyToken, "Silakan pilih provinsi berikut: " + hasilProvinsi);
     }
@@ -277,7 +278,7 @@ public class LineBotController {
         String daftarPulau = "\n";
         int i;
         for (i = 0; i < pulau.size(); i++){
-            daftarPulau += i + ". " + pulau.get(i) + "\n";
+            daftarPulau += i+1 + ". " + pulau.get(i) + "\n";
         }
         botService.replyText(replyToken, "Silakan pilih pulau berikut " + daftarPulau);
     }
