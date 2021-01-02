@@ -343,7 +343,7 @@ public class LineBotController {
             });
 
         } catch (InterruptedException | ExecutionException | IOException e){
-            throw new RuntimeException();
+            throw new RuntimeException(e);
         }
     }
 
